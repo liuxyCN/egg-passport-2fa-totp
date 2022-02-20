@@ -6,5 +6,5 @@
  * @property {String} SOME_KEY - some description
  */
 exports.passport2faTotp = {
-
+  passReqToCallback: true,
 };

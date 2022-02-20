@@ -14,7 +14,7 @@ module.exports = app => {
     };
     // let passport do verify and call verify hook
     app.passport.doVerify(req, user, done);
-  }, function(user, done) {
+  }, function(req, user, done) {
     // 2nd step verification: TOTP code from Google Authenticator
     if (!user.secret) {
       done(new Error('Google Authenticator is not setup yet.'));
