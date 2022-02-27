@@ -12,18 +12,15 @@ module.exports = app => {
       username,
       password,
     };
-    // let passport do verify and call verify hook
+    // passport do verify and call verify hook
     app.passport.doVerify(req, user, done);
   }, function(req, user, done) {
-    // 2nd step verification: TOTP code from Google Authenticator
+    // 2nd step verification: TOTP
     if (!user.secret) {
       done(new Error('Google Authenticator is not setup yet.'));
     } else {
-      // Google Authenticator uses 30 seconds key period
-      // https://github.com/google/google-authenticator/wiki/Key-Uri-Format
-
       const secret = GoogleAuthenticator.decodeSecret(user.secret);
-      done(null, secret, 30);
+      done(null, secret, app.config.passport2faTotp.time || 30);
     }
   }));
 };

@@ -7,4 +7,6 @@
  */
 exports.passport2faTotp = {
   passReqToCallback: true,
+  // Google Authenticator uses 30 seconds key period
+  time: 30,
 };
